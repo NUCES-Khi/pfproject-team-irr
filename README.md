@@ -6,6 +6,30 @@ Programmers:
 |Rija Ali|(23k-0057)|
 |Ibrahim Johar Farooqi|(23k-0074)|
 
+Project Title: Matrices Calculation Programme
+ 
+Project Description: 
+Our project aims to reinforce the core concepts and skills we have learned in the course by developing a Matrices Calculation Program. 
+
+These core concepts include
+Control Structures (If statements & If - Else Statements)
+Switch Statements
+Loops
+Arrays (1D & 2D)
+Functions
+DMA
+Filing 
+
+Project Scope: 
+This program will be created in C language, using the “Developer Command Prompt for VS 2022” as the compiler for our program as well as the interface for the program. The program will consist of:
+Determinant of nxn Square Matrix
+Addition & Subtraction between two Matrices. (mxn)
+Multiplication of between two Matrices [(mxn)]
+Transpose of a Matrix. 
+Convolution of a square Matrix
+
+The program will offer the user the option to choose from the above-mentioned sub-programs that pertain to the use of matrices. For tedious inputs, we will utilize the functionality of filing and dynamic memory allocation. 
+
 Project Proposal:
 https://docs.google.com/document/d/1WgnxUlIsiaGoS_nAoRt0zmTTITkBRQu0Fad-QXwyOXM/edit?usp=sharing
 
