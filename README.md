@@ -1,7 +1,10 @@
-Team Members:
-|Ibrahim Johar Farooqi (23k-0074)|
-|Syeda Rija Ali (23k-0057)|
-|Riya Bhart (23k-0063)|
+Programmers:
+
+|Name|ID|
+|-|----------|
+|Riya Bhart|(23k-0063)|
+|Rija Ali|(23k-0057)|
+|Ibrahim Johar Farooqi|(23k-0074)|
 
 The things we are done with:
 Addition (functions needs to be made)
