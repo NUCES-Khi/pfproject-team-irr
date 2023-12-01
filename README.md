@@ -9,18 +9,18 @@ Programmers:
 Project Proposal:
 https://docs.google.com/document/d/1WgnxUlIsiaGoS_nAoRt0zmTTITkBRQu0Fad-QXwyOXM/edit?usp=sharing
 
-The things we are done with:
-1. Addition between two matrices (functions needs to be made)
-2. Subtraction between two matrices (functions needs to be made)
-3. Multiplication between two matrices (functions needs to be made)
+Tasks completed:
+1. Addition between two matrices. 
+2. Subtraction between two matrices. 
+3. Multiplication between two matrices. 
 4. Transpose of a matrix
 5. Determinant of a nxn matrix
 
-Left:
+Tasks to be done:
 1. Convolution of nxn matrix
 2. DMA and Filing needs to be used in matrices  
 3. User Interface to be created for our calculator 
-
+4. Functions to be created in some elements of the programme
 
 
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/j0WbCUcA)
