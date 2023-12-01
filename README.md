@@ -1,3 +1,8 @@
+Team Members:
+|Ibrahim Johar Farooqi (23k-0074)|
+|Syeda Rija Ali (23k-0057)|
+|Riya Bhart (23k-0063)|
+
 The things we are done with:
 Addition (functions needs to be made)
 Subtraction (functions needs to be made)
@@ -7,7 +12,7 @@ Transpose
 Left:
 Convolution
 DMA and Filing needs to be used 
-
+User Interface to be created
 
 
 
