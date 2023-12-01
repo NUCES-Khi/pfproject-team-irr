@@ -12,21 +12,21 @@ Project Description:
 Our project aims to reinforce the core concepts and skills we have learned in the course by developing a Matrices Calculation Program. 
 
 These core concepts include
-Control Structures (If statements & If - Else Statements),
-Switch Statements,
-Loops,
-Arrays (1D & 2D),
-Functions,
-DMA,
-Filing, 
+1. Control Structures (If statements & If - Else Statements)
+2. Switch Statements
+3. Loops
+4. Arrays (1D & 2D)
+5. Functions
+6. DMA
+7. Filing 
 
 Project Scope: 
 This program will be created in C language, using the “Developer Command Prompt for VS 2022” as the compiler for our program as well as the interface for the program. The program will consist of:
-Determinant of nxn Square Matrix
-Addition & Subtraction between two Matrices. (mxn),
-Multiplication of between two Matrices [(mxn)],
-Transpose of a Matrix,
-Convolution of a square Matrix
+1. Determinant of nxn Square Matrix
+2. Addition & Subtraction between two Matrices. (mxn),
+3. Multiplication of between two Matrices [(mxn)],
+4. Transpose of a Matrix,
+5. Convolution of a square Matrix
 
 The program will offer the user the option to choose from the above-mentioned sub-programs that pertain to the use of matrices. For tedious inputs, we will utilize the functionality of filing and dynamic memory allocation. 
 
