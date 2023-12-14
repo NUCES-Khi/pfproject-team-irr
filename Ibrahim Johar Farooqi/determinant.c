@@ -33,7 +33,6 @@ void readmatrixsize(char *filename, int *n_rows, int *n_cols)
             }
         }
     }
-
     fclose(fptr);
 }
 
