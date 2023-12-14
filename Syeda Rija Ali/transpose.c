@@ -54,9 +54,7 @@ int m,n;
     for (int i = 0; i < m; i++) {
         matrix[i] = (int *)malloc(n * sizeof(int));
     }
-
-   //int matrix[m][n]; 
-
+  
         InputM(m,n,matrix);
         TransposeM(m,n,matrix);
 
