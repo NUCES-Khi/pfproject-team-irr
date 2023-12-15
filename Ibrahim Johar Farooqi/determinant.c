@@ -3,88 +3,10 @@
 #include <string.h>
 
 double determinant(int n, int **matrix);
+int **creatematrix(char *filename, int n_rows, int n_cols);
+void readmatrixsize(char *filename, int *n_rows, int *n_cols);
 
-int **creatematrix(char *filename, int n_rows, int n_cols)
-{
-    FILE *fptr = fopen(filename, "r");
-    
-    if (fptr == NULL)
-    {
-        printf("Error opening file. error in function: [fillmatrix]\n");
-        exit(1);
-    }
-
-    int **matrix = malloc(n_rows * sizeof(int *));
-    
-    for (int i = 0; i < n_rows; i++)
-    {
-        matrix[i] = malloc(n_cols * sizeof(int));
-    }
-    
-    int row = 0;
-    
-    while (!feof(fptr))
-    {
-        if (ferror(fptr))
-        {
-            printf("Error reading file. error in function: [creatematrix]\n");
-            exit(1);
-        }
-
-        for (int j = 0; j < n_cols; j++)
-        {
-            if (fscanf(fptr, "%d", &matrix[row][j]) == EOF)
-            {
-                break;
-            }
-        }
-        row++;
-        
-        if(row == n_rows)
-        {
-            break;
-        }
-    }
-    
-    fclose(fptr);
-    
-    return matrix;
-}
-
-void readmatrixsize(char *filename, int *n_rows, int *n_cols)
-{
-    FILE *fptr = fopen(filename, "r");
-
-    if (fptr == NULL)
-    {
-        printf("Error opening file. error in function: [readmatrixsize]\n");
-        exit(1);
-    }
-
-    *n_rows = 0, *n_cols = 0;
-    char buffer[2048];
-    char *token;
-    int temp_num; 
-
-    while(fgets(buffer, sizeof(buffer), fptr) != NULL)
-    {
-        (*n_rows)++;
-
-        if (*n_rows == 1)
-        {
-            token = strtok(buffer, " \n");
-            while (token != NULL)
-            {
-                (*n_cols)++; 
-                token = strtok(NULL, " \n"); 
-            }
-        }
-    }
-
-    fclose(fptr);
-}
-
-int main()
+int main() //main for determinant
 {
     int size, n_rows = 0, n_cols = 0;
     int **matrix;
@@ -120,8 +42,6 @@ int main()
         printf("The determinant of the matrix is: %.2lf", determinant(n_rows, matrix));
     }
 
-    
-    // Free allocated memory
     for (int i = 0; i < n_rows; i++)
     {
         free(matrix[i]);
@@ -130,9 +50,87 @@ int main()
 
 }
 
+void readmatrixsize(char *filename, int *n_rows, int *n_cols)
+{
+    FILE *fptr = fopen(filename, "r");
+
+    if (fptr == NULL)
+    {
+        printf("Error opening file. error in function: [readmatrixsize]\n");
+        exit(1);
+    }
+
+    *n_rows = 0, *n_cols = 0;
+    char buffer[2048];
+    char *token;
+    int temp_num; 
+
+    while(fgets(buffer, sizeof(buffer), fptr) != NULL)
+    {
+        (*n_rows)++;
+
+        if (*n_rows == 1)
+        {
+            token = strtok(buffer, ",");
+            while (token != NULL)
+            {
+                (*n_cols)++; 
+                token = strtok(NULL, ","); 
+            }
+        }
+    }
+
+    fclose(fptr);
+}
+
+
+int **creatematrix(char *filename, int n_rows, int n_cols)
+{
+    FILE *fptr = fopen(filename, "r");
+
+    if (fptr == NULL)
+    {
+        printf("Error opening file. error in function: [creatematrix]\n");
+        exit(1);
+    }
+
+    int **matrix = malloc(n_rows * sizeof(int *));
+
+    for (int i = 0; i < n_rows; i++)
+    {
+        matrix[i] = malloc(n_cols * sizeof(int));
+
+        char buffer[1024];
+        if (fgets(buffer, sizeof(buffer), fptr) == NULL)
+        {
+            printf("Error reading file. error in function: [creatematrix]\n");
+            exit(1);
+        }
+
+        char *token_val = strtok(buffer, ",");
+        for (int j = 0; j < n_cols; j++)
+        {
+            matrix[i][j] = atoi(token_val);
+            token_val = strtok(NULL, ",");
+        }
+    }
+
+    fclose(fptr);
+
+    return matrix;
+}
+
+
 double determinant(int n, int **matrix)
 {
     double det = 0;
+    int **submatrix; //declaration of sub matrix 
+
+    submatrix = malloc(n * sizeof(int *));
+    for(int i = 0; i < n; i++)
+    {
+        submatrix[i] = malloc(n * sizeof(int));
+    }
 
     //base case
     if (n==1)
@@ -147,14 +145,6 @@ double determinant(int n, int **matrix)
     //recursive case
     else
     {
-        int **submatrix; //declaration of sub matrix 
-
-        submatrix = malloc(n * sizeof(int *));
-        for(int i = 0; i < n; i++)
-        {
-            submatrix[i] = malloc(n * sizeof(int));
-        }
-
         for (int skipIndex = 0; skipIndex < n; skipIndex++) //run loop for rows of except the row which has to be skipped
         {
             int s_i = 0; //index for rows of sub matrix
@@ -190,13 +180,13 @@ double determinant(int n, int **matrix)
 
             det = det + matrix[0][skipIndex] * (determinant(n-1, submatrix) * sign);
         }
-
-        //free submatrix memory
-        for(int i = 0; i < n; i++)
-        {
-            free(submatrix);
-        }
-        free(submatrix);
     }
+
+    //free submatrix memory
+    for(int i = 0; i < n; i++)
+    {
+        free(submatrix[i]);
+    }
+    free(submatrix);
     return det;
 }
