@@ -5,9 +5,13 @@
 void headMessage(const char* title);
 void start();
 void menu();
-double determinant(int n, int **matrix);
+
 int **creatematrix(char *filename, int n_rows, int n_cols);
 void readmatrixsize(char *filename, int *n_rows, int *n_cols);
+
+void matrixAddition(int m, int n, int **arr1,  int **arr2);
+void matrixSubtraction(int m, int n, int **arr1,  int **arr2);
+double determinant(int n, int **matrix);
 
 int main()
 {
@@ -17,6 +21,11 @@ int main()
     printf("\n");
     int n_rows;
     int n_cols;
+    int rows_1;
+    int cols_1;
+    int rows_2;
+    int cols_2;
+    char filename[100];
 
     while(1)
     {
@@ -32,9 +41,96 @@ int main()
         switch (option)
         {
             case '1':
-                /* code */
+                n_rows = 0; 
+                n_cols = 0;
+                int **matrix1_add;
+                int **matrix2_add;
+                filename[0] = '\0';
+                //initialising matrix 1 from file 1
+                printf("\n\t\t\t Enter file name for matrix 1: ");
+                scanf("%s", &filename);
+                readmatrixsize(filename, &n_rows, &n_cols);
+                rows_1 = n_rows;
+                cols_1 = n_cols;
+                matrix1_add = creatematrix(filename, rows_1, cols_1);
+                
+                //initialising matrix 2 from file 2
+                filename[0] = '\0';
+                printf("\n\t\t\t Enter file name for matrix 2: ");
+                scanf("%s", &filename);
+                readmatrixsize(filename, &n_rows, &n_cols);
+                rows_2 = n_rows;
+                cols_2 = n_cols;
+                matrix2_add = creatematrix(filename, rows_2, cols_2);
+
+                if (rows_1 == rows_2 && cols_1 == cols_2)
+                {
+                    matrixAddition(n_rows, n_cols, matrix1_add, matrix2_add);
+                }
+                else
+                {
+                    printf("\n\t\t\t Size of both matrices are not equal for calculation to proceed.");
+                }
+                
+                //free memory of matrix 1
+                for (int i = 0; i < rows_1; i++)
+                {
+                    free(matrix1_add[i]);
+                }
+                free(matrix1_add);
+
+                //free memory of matrix 2
+                for (int i = 0; i < rows_2; i++)
+                {
+                    free(matrix2_add[i]);
+                }
+                free(matrix2_add);
                 break;
             case '2':
+                n_rows = 0; 
+                n_cols = 0;
+                int **matrix1_sub;
+                int **matrix2_sub;
+                filename[0] = '\0';
+                //initialising matrix 1 from file 1
+                printf("\n\t\t\t Enter file name for matrix 1: ");
+                scanf("%s", &filename);
+                readmatrixsize(filename, &n_rows, &n_cols);
+                rows_1 = n_rows;
+                cols_1 = n_cols;
+                matrix1_sub = creatematrix(filename, rows_1, cols_1);
+                
+                //initialising matrix 2 from file 2
+                filename[0] = '\0';
+                printf("\n\t\t\t Enter file name for matrix 2: ");
+                scanf("%s", &filename);
+                readmatrixsize(filename, &n_rows, &n_cols);
+                rows_2 = n_rows;
+                cols_2 = n_cols;
+                matrix2_sub = creatematrix(filename, rows_2, cols_2);
+
+                if (rows_1 == rows_2 && cols_1 == cols_2)
+                {
+                    matrixSubtraction(n_rows, n_cols, matrix1_sub, matrix2_sub);
+                }
+                else
+                {
+                    printf("\n\t\t\t Size of both matrices are not equal for calculation to proceed.");
+                }
+                
+                //free memory of matrix 1
+                for (int i = 0; i < rows_1; i++)
+                {
+                    free(matrix1_sub[i]);
+                }
+                free(matrix1_sub);
+
+                //free memory of matrix 2
+                for (int i = 0; i < rows_2; i++)
+                {
+                    free(matrix2_sub[i]);
+                }
+                free(matrix2_sub);
                 break;
             case '3':
                 break;
@@ -42,7 +138,7 @@ int main()
                 n_rows = 0; 
                 n_cols = 0;
                 int **matrix;
-                char filename[100];
+                filename[0] = '\0';
                 printf("\n\t\t\t Enter file name: ");
                 scanf("%s", &filename);
                 printf("\t\t\t Rows: %d, Cols= %d\n", n_rows, n_cols);
@@ -76,6 +172,74 @@ int main()
     }
 
     return 0;
+}
+
+void matrixSubtraction(int m, int n, int **arr1,  int **arr2)
+{
+    int **arrfinal = (int **)malloc(m * sizeof(int *));
+    for (int i = 0; i < m; i++)
+    {
+        arrfinal[i] = (int *)malloc(n * sizeof(int));
+    }
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            arrfinal[i][j] = arr1[i][j] - arr2[i][j];
+        }
+    }
+
+    printf("\n\n\t\t\t RESULTANT MATRIX OF SUBTRACTION PERFORMED\n");
+    for (int i = 0; i < m; i++)
+    {
+        printf("\n\t\t\t\t\t");
+        for (int j = 0; j < n; j++)
+        {
+            printf("%d  ", arrfinal[i][j]);
+        }
+        printf("\n");
+    }
+
+    for (int i = 0; i < m; i++)
+    {
+        free(arrfinal[i]);
+    }
+    free(arrfinal);
+}
+
+void matrixAddition(int m, int n, int **arr1,  int **arr2)
+{
+    int **arrfinal = (int **)malloc(m * sizeof(int *));
+    for (int i = 0; i < m; i++)
+    {
+        arrfinal[i] = (int *)malloc(n * sizeof(int));
+    }   
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            arrfinal[i][j] = arr1[i][j] + arr2[i][j];
+        }
+    }
+
+    printf("\n\n\t\t\t RESULTANT MATRIX OF ADDITION PERFORMED\n");
+    for (int i = 0; i < m; i++)
+    {
+        printf("\n\t\t\t\t\t");
+        for (int j = 0; j < n; j++)
+        {
+            printf("%d  ", arrfinal[i][j]);
+        }
+        printf("\n");
+    }
+
+    for (int i = 0; i < m; i++)
+    {
+        free(arrfinal[i]);
+    }
+    free(arrfinal);
 }
 
 double determinant(int n, int **matrix)
