@@ -17,58 +17,64 @@ int main()
     printf("\n");
     int n_rows;
     int n_cols;
-    do
+
+    while(1)
     {
-        printf("\n\t\t\t Press Menu Number to continue(-1 to exit): ");
-        scanf("%c", &option);
+        printf("\n\t\t\t Press Menu Number to continue('0' to exit): ");
+        scanf(" %c", &option);
         printf("\n");
+
+        if (option == '0')
+        {
+            break;
+        }
 
         switch (option)
         {
-        case '1':
-            /* code */
-            break;
-        case '2':
-            break;
-        case '3':
-            break;
-        case '4':
-            n_rows = 0; 
-            n_cols = 0;
-            int **matrix;
-            char filename[100];
-            printf("\n\t\t\t Enter file name: ");
-            scanf("%s", &filename);
-            printf("\t\t\t Rows: %d, Cols= %d\n", n_rows, n_cols);
-            readmatrixsize(filename, &n_rows, &n_cols);
-            printf("\t\t\t Rows: %d, Cols= %d\n", n_rows, n_cols);
-            
-            matrix = creatematrix(filename, n_rows, n_cols);
+            case '1':
+                /* code */
+                break;
+            case '2':
+                break;
+            case '3':
+                break;
+            case '4':
+                n_rows = 0; 
+                n_cols = 0;
+                int **matrix;
+                char filename[100];
+                printf("\n\t\t\t Enter file name: ");
+                scanf("%s", &filename);
+                printf("\t\t\t Rows: %d, Cols= %d\n", n_rows, n_cols);
+                readmatrixsize(filename, &n_rows, &n_cols);
+                printf("\t\t\t Rows: %d, Cols= %d\n", n_rows, n_cols);
+                    
+                matrix = creatematrix(filename, n_rows, n_cols);
 
-            if (n_rows != n_cols)
-            {
-                printf("\t\t\t Determinant cannot be calculated since the matrix is not a square matrix.\n");
-            }
-            else
-            {
-                printf("\t\t\t The determinant of the matrix is: %.2lf", determinant(n_rows, matrix));
-            }
+                if (n_rows != n_cols)
+                {
+                    printf("\t\t\t Determinant cannot be calculated since the matrix is not a square matrix.\n");
+                }
+                else
+                {
+                    printf("\t\t\t The determinant of the matrix is: %.2lf", determinant(n_rows, matrix));
+                }
 
-            for (int i = 0; i < n_rows; i++)
-            {
-                free(matrix[i]);
-            }
-            free(matrix);
-            break;
-        case '5':
-            break;
-        case '6':
-            break;
-        default:
-            break;
+                for (int i = 0; i < n_rows; i++)
+                {
+                    free(matrix[i]);
+                }
+                free(matrix);
+                break;
+            case '5':
+                break;
+            case '6':
+                break;
+            default:
+                break;
         }
-    } while (option == '0');
-    
+    }
+
     return 0;
 }
 
