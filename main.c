@@ -11,7 +11,9 @@ void readmatrixsize(char *filename, int *n_rows, int *n_cols);
 
 void matrixAddition(int m, int n, int **arr1,  int **arr2);
 void matrixSubtraction(int m, int n, int **arr1,  int **arr2);
+int **multiplyMatrices(int **matrix1, int rows1, int columns1, int **matrix2, int rows2, int columns2);
 double determinant(int n, int **matrix);
+void transposeM(int m, int n, int **matrix);
 
 int main()
 {
@@ -41,8 +43,8 @@ int main()
         switch (option)
         {
             case '1':
-                n_rows = 0; 
-                n_cols = 0;
+                n_rows = 0, rows_1 = 0, rows_2 = 0; 
+                n_cols = 0, cols_1 = 0, cols_2 = 0;
                 int **matrix1_add;
                 int **matrix2_add;
                 filename[0] = '\0';
@@ -87,8 +89,8 @@ int main()
                 free(matrix2_add);
                 break;
             case '2':
-                n_rows = 0; 
-                n_cols = 0;
+                n_rows = 0, rows_1 = 0, rows_2 = 0; 
+                n_cols = 0, cols_1 = 0, cols_2 = 0;
                 int **matrix1_sub;
                 int **matrix2_sub;
                 filename[0] = '\0';
@@ -133,6 +135,58 @@ int main()
                 free(matrix2_sub);
                 break;
             case '3':
+                n_rows = 0, rows_1 = 0, rows_2 = 0; 
+                n_cols = 0, cols_1 = 0, cols_2 = 0;
+                int **matrix1_mul;
+                int **matrix2_mul;
+                filename[0] = '\0';
+                printf("\n\t\t\t Enter file name for matrix 1: ");
+                scanf("%s", &filename);
+                readmatrixsize(filename, &n_rows, &n_cols);
+                rows_1 = n_rows;
+                cols_1 = n_cols;
+                matrix1_mul = creatematrix(filename, rows_1, cols_1);
+
+                filename[0] = '\0';
+                printf("\n\t\t\t Enter file name for matrix 2: ");
+                scanf("%s", &filename);
+                readmatrixsize(filename, &n_rows, &n_cols);
+                rows_2 = n_rows;
+                cols_2 = n_cols;
+                matrix2_mul = creatematrix(filename, rows_2, cols_2);
+
+                int **result = multiplyMatrices(matrix1_mul, rows_1, cols_1, matrix2_mul, rows_2, cols_2);
+
+                printf("\n\n\t\t\t RESULTANT MATRIX OF MULTIPLICATION PERFORMED\n");
+                for (int i = 0; i < rows_1; i++)
+                {
+                    printf("\n\t\t\t\t\t");
+                    for (int j = 0; j < cols_2; j++)
+                    {
+                        printf("%d  ", result[i][j]);
+                    }
+                    printf("\n");
+                }
+
+                for (int i = 0; i < rows_1; i++)
+                {
+                    free(result[i]);
+                }
+                free(result);
+
+                //free memory of matrix 1
+                for (int i = 0; i < rows_1; i++)
+                {
+                    free(matrix1_mul[i]);
+                }
+                free(matrix1_mul);
+
+                //free memory of matrix 2
+                for (int i = 0; i < rows_2; i++)
+                {
+                    free(matrix2_mul[i]);
+                }
+                free(matrix2_mul);
                 break;
             case '4':
                 n_rows = 0; 
@@ -163,6 +217,21 @@ int main()
                 free(matrix);
                 break;
             case '5':
+                n_rows = 0; 
+                n_cols = 0;
+                int **matrix_tran;
+                filename[0] = '\0';
+                printf("\n\t\t\t Enter file name: ");
+                scanf("%s", &filename);
+                readmatrixsize(filename, &n_rows, &n_cols);
+                matrix_tran = creatematrix(filename, n_rows, n_cols);
+                transposeM(n_rows, n_cols, matrix_tran);
+
+                for (int i = 0; i < n_rows; i++)
+                {
+                    free(matrix_tran[i]);
+                }
+                free(matrix_tran);
                 break;
             case '6':
                 break;
@@ -172,6 +241,48 @@ int main()
     }
 
     return 0;
+}
+
+void transposeM(int m, int n, int **matrix)
+{
+    printf("\n\n\t\t\t TRANSPOSE OF MATRIX:\n");
+    for(int i=0; i<n; i++)
+    {
+        printf("\n\t\t\t ");
+        for(int j=0; j<m; j++)
+        {
+            printf("%02d  ", matrix[j][i]);
+        }
+        printf("\n");
+    }    
+}
+
+int **multiplyMatrices(int **matrix1, int rows1, int columns1, int **matrix2, int rows2, int columns2)
+{
+    if (columns1 != rows2)
+    {
+        printf("Matrices cannot be multiplied!\n");
+        return NULL;
+    }
+
+    int **result = (int **)malloc(rows1 * sizeof(int *));
+    for (int i = 0; i < rows1; i++)
+    {
+        result[i] = (int *)malloc(columns2 * sizeof(int));
+    }
+
+    for (int i = 0; i < rows1; i++)
+    {
+        for (int j = 0; j < columns2; j++)
+        {
+            result[i][j] = 0;
+            for (int k = 0; k < columns1; k++)
+            {
+                result[i][j] += matrix1[i][k] * matrix2[k][j];
+            }
+        }
+    }
+    return result;
 }
 
 void matrixSubtraction(int m, int n, int **arr1,  int **arr2)
@@ -193,10 +304,10 @@ void matrixSubtraction(int m, int n, int **arr1,  int **arr2)
     printf("\n\n\t\t\t RESULTANT MATRIX OF SUBTRACTION PERFORMED\n");
     for (int i = 0; i < m; i++)
     {
-        printf("\n\t\t\t\t\t");
+        printf("\n\t\t\t ");
         for (int j = 0; j < n; j++)
         {
-            printf("%d  ", arrfinal[i][j]);
+            printf("%02d  ", arrfinal[i][j]);
         }
         printf("\n");
     }
@@ -227,10 +338,10 @@ void matrixAddition(int m, int n, int **arr1,  int **arr2)
     printf("\n\n\t\t\t RESULTANT MATRIX OF ADDITION PERFORMED\n");
     for (int i = 0; i < m; i++)
     {
-        printf("\n\t\t\t\t\t");
+        printf("\n\t\t\t ");
         for (int j = 0; j < n; j++)
         {
-            printf("%d  ", arrfinal[i][j]);
+            printf("%02d  ", arrfinal[i][j]);
         }
         printf("\n");
     }
