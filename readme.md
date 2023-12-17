@@ -1,11 +1,11 @@
 #                                                      Programming Fundamentals Lab - Course Project Report
 
- # **Project Title:** Matrices Calculation Programme
+ ## **Project Title:** Matrices Calculation Programme
 **Instructor Name:** Sir Farooq Zaidi
 **Course Title:** Programming Fundamentals - Lab
 **Course Code:** CS1002
 
-## Group Members: 
+**Group Members:**
 1.Syeda Rija Ali (23K-0057)
 2.Riya Bhart (23K-0063)
 3.Ibrahim Johar Farooqi (23K-0074)
@@ -16,15 +16,15 @@ Project Description:
 Our project aims to reinforce the core concepts and skills we have learned in the course by developing a Matrices Calculation Program. 
 
 These core concepts include:
-*Control Structures (If statements & If - Else Statements)
-*Switch Statements
-*Loops
-*Arrays (1D & 2D)
-*Functions
-*DMA
-*Filing 
+* Control Structures (If statements & If - Else Statements)
+* Switch Statements
+* Loops
+* Arrays (1D & 2D)
+* Functions
+* DMA
+* Filing 
 
-Project Scope: 
+**Project Scope:** 
 This program will be created in C language, using the “Developer Command Prompt for VS 2022” as the compiler for our program as well as the interface for the program. The program will consist of:
 Determinant of nxn Square Matrix
 Addition & Subtraction between two Matrices. (mxn)
