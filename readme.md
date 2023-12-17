@@ -1,9 +1,12 @@
 #                                                      Programming Fundamentals Lab - Course Project Report
 
  ## **Project Title:** Matrices Calculation Programme
-**Instructor Name: Sir Farooq Zaidi
-Course Title: Programming Fundamentals - Lab
-Course Code: CS1002**
+ 
+**Instructor Name:** Sir Farooq Zaidi
+
+**Course Title:** Programming Fundamentals - Lab
+
+**Course Code:** CS1002
 
 **Group Members:**
 
