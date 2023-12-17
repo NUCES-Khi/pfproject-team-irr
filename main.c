@@ -8,6 +8,13 @@
 #include <conio.h>
 #include <string.h>
 
+// ANSI escape codes for text color
+#define RED     "\033[0;31m"
+#define GREEN   "\033[0;32m"
+#define YELLOW  "\033[0;33m"
+#define BLUE    "\033[0;34m"
+#define RESET   "\033[0m"
+
 //function prototypes for start screen interface
 void headMessage(const char* title);
 void start();
@@ -657,17 +664,17 @@ void readmatrixsize(char *filename, int *n_rows, int *n_cols)
 //function definition for the menu
 void menu()
 {
-    printf("\n\n\n\t\t\t---------------------------------------------");
-    printf("\n\t\t\t|          PROGRAM FUNCTIONALITIES          |");
-    printf("\n\t\t\t---------------------------------------------");
-    printf("\n\t\t\t|   |1| Addition between TWO Matrices       |");
-    printf("\n\t\t\t|   |2| Subtraction between TWO Matrices    |");
-    printf("\n\t\t\t|   |3| Multiplication between TWO Matrices |");
-    printf("\n\t\t\t|   |4| Determinant of a Matrix             |");
-    printf("\n\t\t\t|   |5| Transpose of a Matrix               |");
-    printf("\n\t\t\t|   |6| Convolution of a Matrix             |");
-    printf("\n\t\t\t|   |0| Exit                                |");    
-    printf("\n\t\t\t---------------------------------------------");
+    printf(GREEN "\n\n\n\t\t\t---------------------------------------------");
+    printf(GREEN "\n\t\t\t|          PROGRAM FUNCTIONALITIES          |");
+    printf(GREEN "\n\t\t\t---------------------------------------------");
+    printf(GREEN "\n\t\t\t|   |1| Addition between TWO Matrices       |");
+    printf(GREEN "\n\t\t\t|   |2| Subtraction between TWO Matrices    |");
+    printf(GREEN "\n\t\t\t|   |3| Multiplication between TWO Matrices |");
+    printf(GREEN "\n\t\t\t|   |4| Determinant of a Matrix             |");
+    printf(GREEN "\n\t\t\t|   |5| Transpose of a Matrix               |");
+    printf(GREEN "\n\t\t\t|   |6| Convolution of a Matrix             |");
+    printf(GREEN "\n\t\t\t|   |0| Exit                                |");    
+    printf(GREEN "\n\t\t\t---------------------------------------------" RESET);
 
 }
 
@@ -675,15 +682,15 @@ void menu()
 void headMessage(const char* title)
 {
     system("cls");  
-    printf("\n\t\t\t#############################################");
-    printf("\n\t\t\t#                                           #");
-    printf("\n\t\t\t# WELCOME TO MATRICES CALCULATION PROGRAMME #");
-    printf("\n\t\t\t#                                           #");
-    printf("\n\t\t\t#############################################");
+    printf(RED "\n\t\t\t#############################################" RESET);
+    printf(RED "\n\t\t\t#                                           #" RESET);
+    printf(RED "\n\t\t\t# WELCOME TO MATRICES CALCULATION PROGRAMME #" RESET);
+    printf(RED "\n\t\t\t#                                           #" RESET);
+    printf(RED "\n\t\t\t#############################################" RESET);
     printf("\n\t\t\t---------------------------------------------");
-    printf("\n\t\t\t\t\t %s", title);
+    printf(BLUE "\n\t\t\t\t\t %s"RESET, title);
     printf("\n\t\t\t---------------------------------------------");
-    printf("\n\t\t\t     Rija Ali - Riya Bhart - Ibrahim Johar");
+    printf(GREEN "\n\t\t\t     Rija Ali - Riya Bhart - Ibrahim Johar" RESET);
     printf("\n\t\t\t---------------------------------------------");
 }
 
@@ -692,11 +699,11 @@ void start()
 {
     headMessage("PF PROJECT");
     printf("\n");
-    printf("\n\t\t\t*********************************************\n");
-    printf("\n\t\t\t    ====================================");
-    printf("\n\t\t\t    *           LET'S START!           *");
-    printf("\n\t\t\t    ====================================");
-    printf("\n\n\t\t\t*********************************************\n");
+    printf(YELLOW "\n\t\t\t*********************************************\n");
+    printf(YELLOW "\n\t\t\t    ====================================");
+    printf(YELLOW "\n\t\t\t    *           LET'S START!           *");
+    printf(YELLOW "\n\t\t\t    ====================================");
+    printf(YELLOW "\n\n\t\t\t*********************************************\n" RESET);
     printf("\n\n\t\t\t\t   Press Enter to begin...");
     getch();
 }
