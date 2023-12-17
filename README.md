@@ -68,7 +68,7 @@ Large arrays may exceed the stack size, leading to a stack overflow. Dynamic mem
 
 
 
-Group Contributions:
+### Group Contributions:
 |Functionalities of the Program|Name|
 |-|----------|
 |Determinant & Interface for programme|Ibrahim Johar|
