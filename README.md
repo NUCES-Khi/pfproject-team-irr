@@ -1,3 +1,5 @@
+# Project Title: Matrices Calculation Programme
+
 ## Programmers:
 
 |Name|ID|
@@ -6,9 +8,9 @@
 |Rija Ali|(23k-0057)|
 |Ibrahim Johar Farooqi|(23k-0074)|
 
-Project Title: Matrices Calculation Programme
+
  
-Project Description: 
+## Project Description: 
 Our project aims to reinforce the core concepts and skills we have learned in the course by developing a Matrices Calculation Program. 
 
 These core concepts include
