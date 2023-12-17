@@ -13,9 +13,9 @@ void fillMatrix(int matrix[][100], int n) {
 }
 
 void fillKernel(int kernel[][2]) {
-    printf("Enter the 2x2 kernel matrix:\n");
-    for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 2; j++) {
+    printf("Enter the 3x3 kernel matrix:\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
             if (scanf("%d", &kernel[i][j]) != 1) {
                 printf("Invalid input. Please enter a valid integer.\n");
                 return;
