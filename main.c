@@ -14,6 +14,8 @@ void matrixSubtraction(int m, int n, int **arr1,  int **arr2);
 int **multiplyMatrices(int **matrix1, int rows1, int columns1, int **matrix2, int rows2, int columns2);
 double determinant(int n, int **matrix);
 void transposeM(int m, int n, int **matrix);
+void fillKernel(int kernel[100][100], int n);
+void convolution(int **matrix_con, int kernel[100][100], int n);
 
 int main()
 {
@@ -50,7 +52,7 @@ int main()
                 filename[0] = '\0';
                 //initialising matrix 1 from file 1
                 printf("\n\t\t\t Enter file name for matrix 1: ");
-                scanf("%s", &filename);
+                scanf("%s", filename);
                 readmatrixsize(filename, &n_rows, &n_cols);
                 rows_1 = n_rows;
                 cols_1 = n_cols;
@@ -59,7 +61,7 @@ int main()
                 //initialising matrix 2 from file 2
                 filename[0] = '\0';
                 printf("\n\t\t\t Enter file name for matrix 2: ");
-                scanf("%s", &filename);
+                scanf("%s", filename);
                 readmatrixsize(filename, &n_rows, &n_cols);
                 rows_2 = n_rows;
                 cols_2 = n_cols;
@@ -96,7 +98,7 @@ int main()
                 filename[0] = '\0';
                 //initialising matrix 1 from file 1
                 printf("\n\t\t\t Enter file name for matrix 1: ");
-                scanf("%s", &filename);
+                scanf("%s", filename);
                 readmatrixsize(filename, &n_rows, &n_cols);
                 rows_1 = n_rows;
                 cols_1 = n_cols;
@@ -105,7 +107,7 @@ int main()
                 //initialising matrix 2 from file 2
                 filename[0] = '\0';
                 printf("\n\t\t\t Enter file name for matrix 2: ");
-                scanf("%s", &filename);
+                scanf("%s", filename);
                 readmatrixsize(filename, &n_rows, &n_cols);
                 rows_2 = n_rows;
                 cols_2 = n_cols;
@@ -141,7 +143,7 @@ int main()
                 int **matrix2_mul;
                 filename[0] = '\0';
                 printf("\n\t\t\t Enter file name for matrix 1: ");
-                scanf("%s", &filename);
+                scanf("%s", filename);
                 readmatrixsize(filename, &n_rows, &n_cols);
                 rows_1 = n_rows;
                 cols_1 = n_cols;
@@ -149,7 +151,7 @@ int main()
 
                 filename[0] = '\0';
                 printf("\n\t\t\t Enter file name for matrix 2: ");
-                scanf("%s", &filename);
+                scanf("%s", filename);
                 readmatrixsize(filename, &n_rows, &n_cols);
                 rows_2 = n_rows;
                 cols_2 = n_cols;
@@ -194,7 +196,7 @@ int main()
                 int **matrix;
                 filename[0] = '\0';
                 printf("\n\t\t\t Enter file name: ");
-                scanf("%s", &filename);
+                scanf("%s", filename);
                 printf("\t\t\t Rows: %d, Cols= %d\n", n_rows, n_cols);
                 readmatrixsize(filename, &n_rows, &n_cols);
                 printf("\t\t\t Rows: %d, Cols= %d\n", n_rows, n_cols);
@@ -222,7 +224,7 @@ int main()
                 int **matrix_tran;
                 filename[0] = '\0';
                 printf("\n\t\t\t Enter file name: ");
-                scanf("%s", &filename);
+                scanf("%s", filename);
                 readmatrixsize(filename, &n_rows, &n_cols);
                 matrix_tran = creatematrix(filename, n_rows, n_cols);
                 transposeM(n_rows, n_cols, matrix_tran);
@@ -234,13 +236,77 @@ int main()
                 free(matrix_tran);
                 break;
             case '6':
+                n_rows = 0;
+                n_cols = 0;
+                int **matrix_con;
+                filename[0] = '\0';
+                printf("\n\t\t\t Enter file name: ");
+                scanf("%s", filename);
+                readmatrixsize(filename, &n_rows, &n_cols);
+                matrix_con = creatematrix(filename, n_rows, n_cols);
+                int kernel[100][100];
+                fillKernel(kernel, n_rows);
+                printf("\t\t\t Convolution result:\n");
+                convolution(matrix_con, kernel, n_rows);
+                for (int i = 0; i < n_rows; i++)
+                {
+                    free(matrix_con[i]);
+                }
+                free(matrix_con);                
                 break;
             default:
+                printf("\t\t\t Enter valid number from list.\n");
                 break;
         }
     }
 
     return 0;
+}
+
+void fillKernel(int kernel[100][100], int n) {
+    printf("\t\t\t Enter the kernel matrix:\n");
+    for (int i = 0; i < n - 2; i++) {
+        for (int j = 0; j < n - 2; j++) {
+            printf("\t\t\t ");
+            scanf("%d", &kernel[i][j]);
+            if (kernel[i][j] != 0 && kernel[i][j] != 1 && kernel[i][j] != -1) {
+                printf("\t\t\t Invalid input. Please enter a valid integer (0, 1, or -1).\n");
+                return;
+            }
+        }
+    }
+}
+
+void convolution(int **matrix_con, int kernel[100][100], int n) {
+    if (n < 3) {
+        printf("\t\t\t Matrix size should be at least 3x3 for convolution.\n");
+        return;
+    }
+
+    int result[100][100];
+
+    for (int i = 0; i < n - 2; i++)
+    {
+        printf("\n\t\t\t ");
+        for (int j = 0; j < n - 2; j++) {
+            result[i][j] = 0;
+
+            for (int x = 0; x < 3; x++)
+            {
+                for (int y = 0; y < 3; y++) {
+                    int matrixRow = i + x;
+                    int matrixCol = j + y;
+
+                    if (matrixRow >= 0 && matrixRow < n && matrixCol >= 0 && matrixCol < n) {
+                        result[i][j] += matrix_con[matrixRow][matrixCol] * kernel[x][y];
+                    }
+                }
+            }
+
+            printf("%d ", result[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 void transposeM(int m, int n, int **matrix)
@@ -536,5 +602,3 @@ void start()
     printf("\n\n\t\t\t\t   Press Enter to begin...");
     getch();
 }
-
-
