@@ -13,7 +13,8 @@
 #### Course Title: Programming Fundamentals - Lab
 
 #### Course Code: CS1002
- 
+
+# Proposal Idea
 ## Project Description: 
 Our project aims to reinforce the core concepts and skills we have learned in the course by developing a Matrices Calculation Program. 
 
@@ -38,10 +39,12 @@ The program functionalities will consist of:
 5. Transpose of a Matrix. 
 6. Convolution of a Square Matrix
 
-The program will offer the user the option to choose from the sub-programs as mentioned above that pertain to the use of matrices. For tedious inputs, we will utilize the functionality of filing and dynamic memory allocation. 
+The program will offer the user the option to choose from the sub-programs mentioned above that pertain to the use of matrices. For tedious inputs, we will utilize the functionality of filing and dynamic memory allocation. 
 
 ## Purpose & Need for this Programme:
 Matrices play a crucial role in various STEM fields, and a program's significance lies in its ability to compute determinants for square matrices. This functionality finds applications in quantum mechanics, geometry, linear transformations, and stress analysis in engineering. Additionally, the program offers the capability to determine the transpose of matrices, with real-world applications spanning cryptography, linear regression, statistics, machine learning, neural networks, matrix operations, and database query optimization. While the program currently addresses lower-level complexities of these applications, it holds the potential for further development to address higher-level complexities in real-world scenarios.
+
+# Implementation of the project
 
 ## Major problems faced during the project & How did we resolve them?
 ### The major problems we faced:
