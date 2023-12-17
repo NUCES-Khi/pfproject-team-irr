@@ -1,14 +1,23 @@
+/*
+*   Programmers:Ibrahim Johar Farooqi, Syeda Rija Ali, Riya Bhart
+*   Description: main.c file for MATRICES CALCULATION PROGRAMME
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
+
+//function prototypes for start screen interface
 void headMessage(const char* title);
 void start();
 void menu();
 
+//function prototypes for allocating matrices & initialising matrices
 int **creatematrix(char *filename, int n_rows, int n_cols);
 void readmatrixsize(char *filename, int *n_rows, int *n_cols);
 
+//function prototypes for matrices calculations
 void matrixAddition(int m, int n, int **arr1,  int **arr2);
 void matrixSubtraction(int m, int n, int **arr1,  int **arr2);
 int **multiplyMatrices(int **matrix1, int rows1, int columns1, int **matrix2, int rows2, int columns2);
@@ -17,10 +26,14 @@ void transposeM(int m, int n, int **matrix);
 void fillKernel(int kernel[100][100], int n);
 void convolution(int **matrix_con, int kernel[100][100], int n);
 
+//main function start
 int main()
 {
+    //function calls for start screen
     start();
     menu(); 
+
+    //declaration of variables used in each case below
     char option;
     printf("\n");
     int n_rows;
@@ -29,27 +42,39 @@ int main()
     int cols_1;
     int rows_2;
     int cols_2;
+
+    //declaration of variable to store filename of each .csv holding raw data of matrix
     char filename[100];
 
     while(1)
     {
+        //input prompt
         printf("\n\t\t\t Press Menu Number to continue('0' to exit): ");
         scanf(" %c", &option);
         printf("\n");
 
-        if (option == '0')
+        if (option == '0') //exit program if 0 is input from user
         {
             break;
         }
 
+        //use of switch statement
         switch (option)
         {
+            //case 1 for addition between two matrices
             case '1':
+                
+                //initialising variables to 0
                 n_rows = 0, rows_1 = 0, rows_2 = 0; 
                 n_cols = 0, cols_1 = 0, cols_2 = 0;
+                
+                //declaring 2d matrices
                 int **matrix1_add;
                 int **matrix2_add;
+
+                //initialising filename to null
                 filename[0] = '\0';
+
                 //initialising matrix 1 from file 1
                 printf("\n\t\t\t Enter file name for matrix 1: ");
                 scanf("%s", filename);
@@ -67,6 +92,7 @@ int main()
                 cols_2 = n_cols;
                 matrix2_add = creatematrix(filename, rows_2, cols_2);
 
+                //check if the size of both matrices is the same
                 if (rows_1 == rows_2 && cols_1 == cols_2)
                 {
                     matrixAddition(n_rows, n_cols, matrix1_add, matrix2_add);
@@ -90,12 +116,21 @@ int main()
                 }
                 free(matrix2_add);
                 break;
+
+            //case 2 for subtraction between two matrices
             case '2':
+                
+                //initialising variables to 0
                 n_rows = 0, rows_1 = 0, rows_2 = 0; 
                 n_cols = 0, cols_1 = 0, cols_2 = 0;
+
+                //declaring 2d matrices
                 int **matrix1_sub;
                 int **matrix2_sub;
+
+                //initialising filename to null
                 filename[0] = '\0';
+
                 //initialising matrix 1 from file 1
                 printf("\n\t\t\t Enter file name for matrix 1: ");
                 scanf("%s", filename);
@@ -113,6 +148,7 @@ int main()
                 cols_2 = n_cols;
                 matrix2_sub = creatematrix(filename, rows_2, cols_2);
 
+                //check if the size of both matrices is the same
                 if (rows_1 == rows_2 && cols_1 == cols_2)
                 {
                     matrixSubtraction(n_rows, n_cols, matrix1_sub, matrix2_sub);
@@ -136,29 +172,44 @@ int main()
                 }
                 free(matrix2_sub);
                 break;
+
+            //case 3 for multiplication between two matrices
             case '3':
+
+                //initialising variables to 0
                 n_rows = 0, rows_1 = 0, rows_2 = 0; 
                 n_cols = 0, cols_1 = 0, cols_2 = 0;
+
+                //declaring 2d matrices
                 int **matrix1_mul;
                 int **matrix2_mul;
+
+                //initialising filename to null
                 filename[0] = '\0';
                 printf("\n\t\t\t Enter file name for matrix 1: ");
                 scanf("%s", filename);
+
+                //initialising matrix 1 from file 1
                 readmatrixsize(filename, &n_rows, &n_cols);
                 rows_1 = n_rows;
                 cols_1 = n_cols;
                 matrix1_mul = creatematrix(filename, rows_1, cols_1);
 
+                //initialising filename to null
                 filename[0] = '\0';
                 printf("\n\t\t\t Enter file name for matrix 2: ");
                 scanf("%s", filename);
+
+                //initialising matrix 2 from file 2
                 readmatrixsize(filename, &n_rows, &n_cols);
                 rows_2 = n_rows;
                 cols_2 = n_cols;
                 matrix2_mul = creatematrix(filename, rows_2, cols_2);
 
+                //result calculation call to multiplication function
                 int **result = multiplyMatrices(matrix1_mul, rows_1, cols_1, matrix2_mul, rows_2, cols_2);
-
+                
+                //printing of resultant matrix
                 printf("\n\n\t\t\t RESULTANT MATRIX OF MULTIPLICATION PERFORMED\n");
                 for (int i = 0; i < rows_1; i++)
                 {
@@ -170,6 +221,7 @@ int main()
                     printf("\n");
                 }
 
+                //free memory of resultant matrix
                 for (int i = 0; i < rows_1; i++)
                 {
                     free(result[i]);
@@ -190,19 +242,27 @@ int main()
                 }
                 free(matrix2_mul);
                 break;
+            
+            //case 4 for calculating determinant of a matrix
             case '4':
+
+                //initialising variables to 0
                 n_rows = 0; 
                 n_cols = 0;
+
+                //declaring 2d matrix
                 int **matrix;
+
+                //initialising filename to null
                 filename[0] = '\0';
                 printf("\n\t\t\t Enter file name: ");
                 scanf("%s", filename);
-                printf("\t\t\t Rows: %d, Cols= %d\n", n_rows, n_cols);
-                readmatrixsize(filename, &n_rows, &n_cols);
-                printf("\t\t\t Rows: %d, Cols= %d\n", n_rows, n_cols);
-                    
+
+                //initialising 2d matrix
+                readmatrixsize(filename, &n_rows, &n_cols);    
                 matrix = creatematrix(filename, n_rows, n_cols);
 
+                //check if matrix is square matrix or not
                 if (n_rows != n_cols)
                 {
                     printf("\t\t\t Determinant cannot be calculated since the matrix is not a square matrix.\n");
@@ -212,42 +272,69 @@ int main()
                     printf("\t\t\t The determinant of the matrix is: %.2lf", determinant(n_rows, matrix));
                 }
 
+                //free memory of 2d array
                 for (int i = 0; i < n_rows; i++)
                 {
                     free(matrix[i]);
                 }
                 free(matrix);
                 break;
+
+            //case 5 for calculating transpose of a matrix
             case '5':
+                
+                //initialising variables to 0
                 n_rows = 0; 
                 n_cols = 0;
+
+                //declaring 2d matrix
                 int **matrix_tran;
+
+                //initialising filename to null
                 filename[0] = '\0';
                 printf("\n\t\t\t Enter file name: ");
                 scanf("%s", filename);
+
+                //initialising matrix from file
                 readmatrixsize(filename, &n_rows, &n_cols);
                 matrix_tran = creatematrix(filename, n_rows, n_cols);
                 transposeM(n_rows, n_cols, matrix_tran);
 
+                //free memory
                 for (int i = 0; i < n_rows; i++)
                 {
                     free(matrix_tran[i]);
                 }
                 free(matrix_tran);
                 break;
+            //case 6 for the calculation of the convolution of a matrix
             case '6':
+
+                //initialising variables to 0
                 n_rows = 0;
                 n_cols = 0;
+
+                //declaring of a 2d matrix
                 int **matrix_con;
+
+                //initialising the filename to null
                 filename[0] = '\0';
                 printf("\n\t\t\t Enter file name: ");
                 scanf("%s", filename);
+
+                //initialising the matrix from the file
                 readmatrixsize(filename, &n_rows, &n_cols);
                 matrix_con = creatematrix(filename, n_rows, n_cols);
+                
+                //declaring the kernel
                 int kernel[100][100];
                 fillKernel(kernel, n_rows);
+
+                //printing the result of the convolution
                 printf("\t\t\t Convolution result:\n");
                 convolution(matrix_con, kernel, n_rows);
+
+                //free memory of the matrix
                 for (int i = 0; i < n_rows; i++)
                 {
                     free(matrix_con[i]);
@@ -257,12 +344,12 @@ int main()
             default:
                 printf("\t\t\t Enter valid number from list.\n");
                 break;
-        }
+        }//end of switch statement
     }
-
     return 0;
-}
+}//end main()
 
+//function definition of fillKernel
 void fillKernel(int kernel[100][100], int n) {
     printf("\t\t\t Enter the kernel matrix:\n");
     for (int i = 0; i < n - 2; i++) {
@@ -277,6 +364,7 @@ void fillKernel(int kernel[100][100], int n) {
     }
 }
 
+//function definition of the calculation of convolution
 void convolution(int **matrix_con, int kernel[100][100], int n) {
     if (n < 3) {
         printf("\t\t\t Matrix size should be at least 3x3 for convolution.\n");
@@ -309,6 +397,7 @@ void convolution(int **matrix_con, int kernel[100][100], int n) {
     }
 }
 
+//function definition for the calculation of the transpose
 void transposeM(int m, int n, int **matrix)
 {
     printf("\n\n\t\t\t TRANSPOSE OF MATRIX:\n");
@@ -323,6 +412,7 @@ void transposeM(int m, int n, int **matrix)
     }    
 }
 
+//function definition for the multiplication between two matrices
 int **multiplyMatrices(int **matrix1, int rows1, int columns1, int **matrix2, int rows2, int columns2)
 {
     if (columns1 != rows2)
@@ -351,6 +441,7 @@ int **multiplyMatrices(int **matrix1, int rows1, int columns1, int **matrix2, in
     return result;
 }
 
+//function definition for the subtraction between two matrices
 void matrixSubtraction(int m, int n, int **arr1,  int **arr2)
 {
     int **arrfinal = (int **)malloc(m * sizeof(int *));
@@ -385,6 +476,7 @@ void matrixSubtraction(int m, int n, int **arr1,  int **arr2)
     free(arrfinal);
 }
 
+//function definition for the addition between two matrices
 void matrixAddition(int m, int n, int **arr1,  int **arr2)
 {
     int **arrfinal = (int **)malloc(m * sizeof(int *));
@@ -419,6 +511,7 @@ void matrixAddition(int m, int n, int **arr1,  int **arr2)
     free(arrfinal);
 }
 
+//fucntion definition for the calculation of the determinant of a matrix
 double determinant(int n, int **matrix)
 {
     double det = 0;
@@ -489,6 +582,8 @@ double determinant(int n, int **matrix)
     return det;
 }
 
+
+//function definition for the creation of matrix
 int **creatematrix(char *filename, int n_rows, int n_cols)
 {
     FILE *fptr = fopen(filename, "r");
@@ -525,7 +620,7 @@ int **creatematrix(char *filename, int n_rows, int n_cols)
     return matrix;
 }
 
-
+//function definition for the reading of the size of the matrix
 void readmatrixsize(char *filename, int *n_rows, int *n_cols)
 {
     FILE *fptr = fopen(filename, "r");
@@ -559,7 +654,7 @@ void readmatrixsize(char *filename, int *n_rows, int *n_cols)
     fclose(fptr);
 }
 
-
+//function definition for the menu
 void menu()
 {
     printf("\n\n\n\t\t\t---------------------------------------------");
@@ -570,17 +665,19 @@ void menu()
     printf("\n\t\t\t|   |3| Multiplication between TWO Matrices |");
     printf("\n\t\t\t|   |4| Determinant of a Matrix             |");
     printf("\n\t\t\t|   |5| Transpose of a Matrix               |");
-    printf("\n\t\t\t|   |6| Convolution of a Matrix             |");    
+    printf("\n\t\t\t|   |6| Convolution of a Matrix             |");
+    printf("\n\t\t\t|   |0| Exit                                |");    
     printf("\n\t\t\t---------------------------------------------");
 
 }
 
+//function definition for the headmessage
 void headMessage(const char* title)
 {
     system("cls");  
     printf("\n\t\t\t#############################################");
     printf("\n\t\t\t#                                           #");
-    printf("\n\t\t\t#     WELCOME TO THE MATRIX CALCULATOR      #");
+    printf("\n\t\t\t# WELCOME TO MATRICES CALCULATION PROGRAMME #");
     printf("\n\t\t\t#                                           #");
     printf("\n\t\t\t#############################################");
     printf("\n\t\t\t---------------------------------------------");
@@ -590,6 +687,7 @@ void headMessage(const char* title)
     printf("\n\t\t\t---------------------------------------------");
 }
 
+//function definition for the start message
 void start()
 {
     headMessage("PF PROJECT");
@@ -602,3 +700,5 @@ void start()
     printf("\n\n\t\t\t\t   Press Enter to begin...");
     getch();
 }
+
+//end of file
