@@ -12,7 +12,7 @@ void fillMatrix(int matrix[][100], int n) {
     }
 }
 
-void fillKernel(int kernel[][2]) {
+void fillKernel(int kernel[][3]) {
     printf("Enter the 3x3 kernel matrix:\n");
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -24,9 +24,9 @@ void fillKernel(int kernel[][2]) {
     }
 }
 
-void convolution(int matrix[][100], int kernel[][2], int n) {
-    if (n < 2) {
-        printf("Matrix size should be at least 2x2 for convolution.\n");
+void convolution(int matrix[][100], int kernel[][3], int n) {
+    if (n < 3) {
+        printf("Matrix size should be at least 3x3 for convolution.\n");
         return;
     }
 
@@ -36,8 +36,8 @@ void convolution(int matrix[][100], int kernel[][2], int n) {
         for (int j = 0; j < n - 2; j++) {
             result[i][j] = 0;
 
-            for (int x = 0; x < 2; x++) {
-                for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 3; x++) {
+                for (int y = 0; y < 3; y++) {
                     
                     int matrixRow = i + x;
                     int matrixCol = j + y;
@@ -58,15 +58,15 @@ int main() {
     int n;
 
     printf("Enter the size of the square matrix: ");
-    if (scanf("%d", &n) != 1 || n < 2) {
-        printf("Invalid matrix size. Please enter a valid integer greater than or equal to 2.\n");
+    if (scanf("%d", &n) != 1 || n < 3) {
+        printf("Invalid matrix size. Please enter a valid integer greater than or equal to 3.\n");
         return 1;
     }
 
     int matrix[100][100];
     fillMatrix(matrix, n);
 
-    int kernel[2][2];
+    int kernel[3][3];
     fillKernel(kernel);
 
     printf("Convolution result:\n");
