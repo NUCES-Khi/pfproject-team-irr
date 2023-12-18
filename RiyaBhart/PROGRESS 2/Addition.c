@@ -3,12 +3,13 @@
 
 void matrixAddition(int m, int n, int **arr1,  int **arr2)
 {
+    //allocating memory
     int **arrfinal = (int **)malloc(m * sizeof(int *));
     for (int i = 0; i < m; i++)
     {
         arrfinal[i] = (int *)malloc(n * sizeof(int));
     }
-
+//Addition of matrices
     for (int i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)
@@ -16,7 +17,7 @@ void matrixAddition(int m, int n, int **arr1,  int **arr2)
             arrfinal[i][j] = arr1[i][j] + arr2[i][j];
         }
     }
-
+//printing the matrix
     printf("ADDITION OF THE TWO MATRICES\n");
     for (int i = 0; i < m; i++)
     {
@@ -26,7 +27,7 @@ void matrixAddition(int m, int n, int **arr1,  int **arr2)
         }
         printf("\n");
     }
-
+//freeing memory
     for (int i = 0; i < m; i++)
     {
         free(arrfinal[i]);
@@ -62,7 +63,7 @@ int main()
             scanf("%d", &arr1[i][j]);
         }
     }
-
+//taking value inputs
     printf("Enter values in second array:\n");
     for (int i = 0; i < m; i++)
     {
@@ -71,7 +72,7 @@ int main()
             scanf("%d", &arr2[i][j]);
         }
     }
-
+//printing the values
     printf("\nFirst array\n");
     for (int i = 0; i < m; i++)
     {
