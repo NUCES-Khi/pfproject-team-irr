@@ -50,7 +50,7 @@ int main() {
         }
     }
 
-    // Perform matrix multiplication
+    // Performing matrix multiplication
     int **ans = multiplyMatrices(arr1, m, n, arr2, p, q);
 
     // Displaying answer
@@ -63,7 +63,7 @@ int main() {
             printf("\n");
         }
 
-        // Free dynamically allocated memory
+        // Freeing dynamically allocated memory
         freeMatrix(arr1, m);
         freeMatrix(arr2, p);
         freeMatrix(ans, m);
